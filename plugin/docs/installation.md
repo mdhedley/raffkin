@@ -5,8 +5,8 @@
 
 # Installation & setup
 
-Raffkin is a plugin for **Claude Code** and **OpenAI Codex** that works your **Exabeam New-Scale** tenant
-through the Exabeam MCP, Exabeam's tool interface for AI agents. Setup is the same shape on both hosts: install the plugin, add one credentials
+Raffkin is a plugin for **Claude Code**, **OpenAI Codex**, and **Google Antigravity (AGY CLI)** that works your **Exabeam New-Scale** tenant
+through the Exabeam MCP, Exabeam's tool interface for AI agents. Setup is the same shape on all hosts: install the plugin, add one credentials
 file, check, and run your first investigation. Five minutes.
 
 The safety gate is on from the moment the plugin is installed: dismissing an alert or closing a case
@@ -18,7 +18,7 @@ one, the call is refused.
 
 ## Before you start
 
-- **A host agent:** the `claude` CLI (Claude Code) or the `codex` CLI (Codex), signed in.
+- **A host agent:** the `claude` CLI (Claude Code), the `codex` CLI (Codex), or the `agy` CLI (Google Antigravity), signed in.
 - **A supported model.** On Claude Code, Sonnet 4.6 or newer, or Opus; on Codex, GPT-5.6 Terra or Sol.
   Smaller models (Haiku, Luna) are not supported. See [Security](security-guardrails.md#how-it-is-tested)
   for how the supported models are validated.
@@ -54,7 +54,7 @@ one, the call is refused.
 - **This copy is a distribution.** It is provided under the terms in its `LICENSE` file by the
   organization that distributes it, which also provides its support; see [Support](support.md).
 /distribution-only -->
-- **Your own subscription.** Raffkin runs inside your Claude Code or Codex plan. An investigation is a long
+- **Your own subscription.** Raffkin runs inside your Claude Code, Codex, or Google Antigravity plan. An investigation is a long
   agent session and is billed by your provider like any other.
 
 ## Quick start — Claude Code
@@ -144,6 +144,35 @@ asks before every write. Noisier, not less safe. And if you script Raffkin with 
 nobody is at the keyboard, Codex cancels any write that needs an approval rather than letting it
 through — the gate does not evaporate when the human does.
 
+## Quick start — Google Antigravity (AGY CLI)
+
+**1. Install the plugin.**
+
+Google Antigravity ([plugin docs](https://antigravity.google/docs/plugins/)) installs plugins directly from GitHub repositories into `~/.gemini/config/plugins/`. From your terminal:
+
+```bash
+agy plugin install https://github.com/open-agent-ai-security/raffkin/tree/main/plugin
+agy plugin list      # confirm: "name": "raffkin"
+```
+
+(If testing from a local clone, `agy plugin install ./plugin` and `agy plugin validate ./plugin` also work.)
+
+**2. Add your credentials** — the same file as for Claude Code and Codex, above (`~/.exabeam-mcp.env`, `https://`, `chmod 600`).
+
+**3. Check the setup.** The plugin ships a read-only diagnostic that tells you what, if anything, is missing:
+
+```bash
+bash ~/.gemini/config/plugins/raffkin/preflight.sh
+```
+
+Expect `✓` on every line, including **`Exabeam MCP reachable`** and **`Human-in-the-loop gate ON`**. A `!` or `✗` line names what to fix; if you see `No credentials yet`, go back to step 2.
+
+**4. Run your first investigation.** In an Antigravity session:
+
+> investigate alert `<alert id>`
+
+The bundled skills (`soc-investigate`, `triage-cases`, `rule-tuning`) are loaded directly into Antigravity CLI (`agy`) and IDE sessions.
+
 ## Updating
 
 ```bash
@@ -154,6 +183,9 @@ claude plugin update raffkin@open-agent-ai-security
 # Codex
 codex plugin marketplace upgrade open-agent-ai-security
 codex plugin add raffkin@open-agent-ai-security
+
+# Google Antigravity (AGY CLI)
+agy plugin install https://github.com/open-agent-ai-security/raffkin/tree/main/plugin
 ```
 
 Both commands matter on Claude Code: the first refreshes the catalog, the second installs from it.
@@ -224,7 +256,10 @@ claude plugin marketplace remove open-agent-ai-security   # optional; also remov
 # Codex
 codex plugin remove raffkin@open-agent-ai-security
 codex plugin marketplace remove open-agent-ai-security   # optional; same caveat
+
+# Google Antigravity (AGY CLI)
+agy plugin uninstall raffkin
 ```
 
-Removing the plugin removes the gate it shipped. Neither command touches `~/.exabeam-mcp.env`; delete
+Removing the plugin removes the gate it shipped. None of these commands touch `~/.exabeam-mcp.env`; delete
 that yourself when you are done with the credentials.

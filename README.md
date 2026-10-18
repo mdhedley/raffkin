@@ -13,13 +13,13 @@
 > ## 📘 Looking to install or use Raffkin? Start at the user guide.
 > ### **[open-agent-ai-security.github.io/raffkin](https://open-agent-ai-security.github.io/raffkin/)**
 >
-> How to install on Claude Code or Codex, credentials, the safety gate, your first investigation,
+> How to install on Claude Code, Codex, or Google Antigravity, credentials, the safety gate, your first investigation,
 > what gets logged. Everything on this page below the line is about how Raffkin is **built** —
 > it is for people working on the code.
 
 ---
 
-Raffkin gives an AI coding agent — **Claude Code or OpenAI Codex** — the job of a SOC analyst on an
+Raffkin gives an AI coding agent — **Claude Code, OpenAI Codex, or Google Antigravity** — the job of a SOC analyst on an
 Exabeam New-Scale tenant, with the guardrails and governance that make that safe to do. Three skills,
 named for the person whose work they do:
 

@@ -4,7 +4,7 @@
 -->
 
 # Raffkin
-**An agentic SOC skill suite for Exabeam New-Scale — a plugin for Claude Code and OpenAI Codex.**
+**An agentic SOC skill suite for Exabeam New-Scale — a plugin for Claude Code, OpenAI Codex, and Google Antigravity.**
 
 [![Project level: Production](https://img.shields.io/badge/project_level-production-3fb950)](https://open-agent-ai-security.github.io/project-levels/)
 [![CI](https://github.com/open-agent-ai-security/raffkin/actions/workflows/ci.yml/badge.svg)](https://github.com/open-agent-ai-security/raffkin/actions/workflows/ci.yml)
@@ -52,7 +52,8 @@ Each hands off to the others: a single case to `soc-investigate`, a noise cluste
 
 1. Install: `claude plugin marketplace add open-agent-ai-security/plugins` then
    `claude plugin install raffkin@open-agent-ai-security` (Codex:
-   `codex plugin marketplace add open-agent-ai-security/plugins` then `codex plugin add raffkin@open-agent-ai-security`).
+   `codex plugin marketplace add open-agent-ai-security/plugins` then `codex plugin add raffkin@open-agent-ai-security`;
+   Google Antigravity: `agy plugin install https://github.com/open-agent-ai-security/raffkin/tree/main/plugin`).
 2. Add your Exabeam API key and secret to `~/.exabeam-mcp.env`.
 3. Run `preflight.sh` from the installed plugin to check the connection and the gate.
 4. Say *"investigate alert `<id>`"*.
